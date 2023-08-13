@@ -1,0 +1,43 @@
+From 1b2aebae951597f9473a9c1b6ebdd0191c8b6287 Mon Sep 17 00:00:00 2001
+From: Mick Batchelor <mickbatch98@gmail.com>
+Date: Thu, 10 Aug 2023 00:12:22 +1000
+Subject: [PATCH 2/2] fix wasm extension for dmake
+
+---
+ tools/CMakeLists.txt | 16 +++++++++++++---
+ 1 file changed, 13 insertions(+), 3 deletions(-)
+
+diff --git a/tools/CMakeLists.txt b/tools/CMakeLists.txt
+index cbf3f8bcc..02ba65e62 100644
+--- a/tools/CMakeLists.txt
++++ b/tools/CMakeLists.txt
+@@ -9,6 +9,10 @@ foreach(file ${srcs_lib})
+     set(srcs_tools ${srcs_tools} ${src})
+ endforeach()
+ 
++if (EMSCRIPTEN)
++    set(CMAKE_EXECUTABLE_SUFFIX ".wasm")
++endif()
++
+ add_executable(dmake EXCLUDE_FROM_ALL
+         dmake.cpp
+         ${CMAKE_SOURCE_DIR}/cli/filelister.cpp
+@@ -25,6 +29,12 @@ if (WIN32 AND NOT BORLAND)
+     endif()
+ endif()
+ 
+-add_custom_target(run-dmake $<TARGET_FILE:dmake>
+-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+-        DEPENDS dmake)
++if (NOT EMSCRIPTEN)
++    add_custom_target(run-dmake $<TARGET_FILE:dmake>
++            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
++            DEPENDS dmake)
++endif()
++
++if (EMSCRIPTEN)
++    set(CMAKE_EXECUTABLE_SUFFIX ".wasm")
++endif()
+-- 
+2.39.2.windows.1
+
