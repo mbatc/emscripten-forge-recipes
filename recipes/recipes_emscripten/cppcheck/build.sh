@@ -8,14 +8,15 @@ if [[ ${target_platform} == osx-64 ]]; then
 fi
 
 mkdir build && cd build
-emcmake cmake ${CMAKE_ARGS} \
+cmake ${CMAKE_ARGS} \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \
     -DCMAKE_BUILD_TYPE=Release \
     "${CMAKE_PLATFORM_FLAGS[@]}" \
     $SRC_DIR
 
-emmake make install -j ${CPU_COUNT}
+make install -j ${CPU_COUNT}
 
 cd ..
 cd htmlreport
+
 $PYTHON setup.py install --single-version-externally-managed --record=record.txt

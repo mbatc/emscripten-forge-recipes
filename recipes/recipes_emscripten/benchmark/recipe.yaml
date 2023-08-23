@@ -1,0 +1,36 @@
+context:
+  version: '1.8.2'
+
+package:
+  name: "benchmark"
+  version: "{{ version }}"
+
+source:
+  fn: benchmark-{{ version }}.tar.gz
+  url: https://github.com/google/benchmark/archive/v{{ version }}.tar.gz
+  sha256: 2aab2980d0376137f969d92848fbb68216abb07633034534fc8c65cc4e7a0e93
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - cmake
+    - ninja
+    - "{{ compiler('c') }}"
+    - "{{ compiler('cxx') }}"
+
+test:
+  commands:
+    - test -f $PREFIX/include/benchmark/benchmark.h  # [unix]
+    - test -f $PREFIX/lib/libbenchmark.a  # [unix]
+    - test -f $PREFIX/lib/libbenchmark_main.a  # [unix]
+    # - test -f $PREFIX/lib/libbenchmark${SHLIB_EXT}  # [unix]
+    # - test -f $PREFIX/lib/libbenchmark_main${SHLIB_EXT}  # [unix]
+
+about:
+  home: https://github.com/google/benchmark
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  summary: A microbenchmark support library
