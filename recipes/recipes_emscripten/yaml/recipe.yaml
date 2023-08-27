@@ -1,0 +1,28 @@
+context:
+  version: '0.2.5'
+
+package:
+  name: yaml
+  version: '{{ version }}'
+
+source:
+  url: https://github.com/yaml/libyaml/releases/download/{{ version }}/yaml-{{ version }}.tar.gz
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - '{{ compiler("c") }}'
+    - '{{ compiler("cxx") }}'
+    - cmake
+    - ninja
+
+about:
+  home: https://github.com/yaml/libyaml
+  license: MIT
+  license_family: MIT
+  license_file: License
+  summary: LibYAML - A C library for parsing and emitting YAML.
+  doc_url: https://github.com/yaml/libyaml/wiki
+  dev_url: https://github.com/yaml/libyaml
