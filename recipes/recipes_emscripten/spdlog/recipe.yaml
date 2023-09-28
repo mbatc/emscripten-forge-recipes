@@ -9,6 +9,7 @@ source:
   url: https://github.com/gabime/spdlog/archive/v{{ version }}.tar.gz
   patches:
     - fix.patch
+    - fmt-version-fix.patch
 
 build:
   number: 1
