@@ -1,0 +1,38 @@
+context:
+  name: console_bridge
+  version: '1.0.2'
+
+package:
+  name: console_bridge
+  version: '{{ version }}'
+
+source:
+  url: https://github.com/ros/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 303a619c01a9e14a3c82eb9762b8a428ef5311a6d46353872ab9a904358be4a4
+  patches:
+    - 96.patch
+
+build:
+  number: 0
+  run_exports:
+    - "{{ pin_subpackage(name, max_pin='x.x') }}"
+
+requirements:
+  build:
+    - "{{ compiler('cxx') }}"
+    - cmake
+    - make
+
+about:
+  home: http://github.com/ros/console_bridge
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: A ROS-independent package for logging that seamlessly pipes into rosconsole/rosout for ROS-dependent packages.
+  dev_url: https://github.com/ros/console_bridge
+
+extra:
+  recipe-maintainers:
+    - jcarpent
+    - wolfv
+    - lesteve
