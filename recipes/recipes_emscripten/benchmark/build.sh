@@ -15,6 +15,7 @@ cmake ${CMAKE_ARGS} \
     -DBENCHMARK_ENABLE_GTEST_TESTS=OFF \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DBUILD_SHARED_LIBS=ON \
+    -DBENCHMARK_ENABLE_WERROR=OFF \
     -GNinja \
     ..
 
@@ -24,5 +25,5 @@ popd
 
 # https://github.com/google/benchmark/issues/824
 if [[ `uname -s` == "Linux" ]]; then
-    sed -i 's:INTERFACE_LINK_LIBRARIES "-pthread;.*:INTERFACE_LINK_LIBRARIES "-pthread;-lrt":g' ${PREFIX}/lib/cmake/benchmark/benchmarkTargets.cmake
+    sed -i 's:INTERFACE_LINK_LIBRARIES "-pthread;.*:INTERFACE_LINK_LIBRARIES "-pthread":g' ${PREFIX}/lib/cmake/benchmark/benchmarkTargets.cmake
 fi
