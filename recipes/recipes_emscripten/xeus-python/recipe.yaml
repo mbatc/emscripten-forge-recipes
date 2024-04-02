@@ -1,5 +1,5 @@
 context:
-  version: 0.15.9
+  version: 0.16.0
 
 package:
   name: xeus-python
@@ -7,10 +7,11 @@ package:
 
 source:
   url: https://github.com/jupyter-xeus/xeus-python/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 6863dcb1c4e0de0c9373539334d8b5933aafaa55f5368c0eab8b8f0cbac78dbd
+  sha256: a9936219650dce05b05eeff5c57472004c098b1fd7145fc2c14c95dbea8e9a3b
+
 
 build:
-  number: 1
+  number: 4
 
 requirements:
   build:
@@ -19,24 +20,24 @@ requirements:
     - ninja
   host:
     - libpython
-    - nlohmann_json ==3.9.1
+    - nlohmann_json
     - xeus
     - xeus-lite
     - pybind11
     - pybind11_json
     - xtl
-    - pyjs >=1.1.0,<2.0.0
+    - pyjs >=2,<3
   run:
     - python
     - ipython
     - jedi
     - xeus-python-shell >=0.6.0,<0.7
-    - requests-wasm-polyfill >=0.3.0
+    - pyjs >=2,<3
 
 test:
   commands:
-    - sel(emscripten): test -f $PREFIX/bin/xpython_wasm.wasm
-    - sel(emscripten): test -f $PREFIX/bin/xpython_wasm.js
+    - sel(emscripten): test -f $PREFIX/bin/xpython.wasm
+    - sel(emscripten): test -f $PREFIX/bin/xpython.js
 
 about:
   home: https://github.com/jupyter-xeus/xeus-python

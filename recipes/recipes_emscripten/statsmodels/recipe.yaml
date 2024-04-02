@@ -1,6 +1,6 @@
 context:
   name: "statsmodels"
-  version: "0.13.2"
+  version: "0.14.1"
 
 package:
   name: "{{ name }}"
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 77dc292c9939c036a476f1770f9d08976b05437daa229928da73231147cde7d4
+  sha256: 2260efdc1ef89f39c670a0bd8151b1d0843567781bcafec6cda0534eb47a94f6
 
 build:
   script: "{{ PYTHON }} -m pip install . -vv"
@@ -17,11 +17,12 @@ build:
 requirements:
   build:
     - "{{ compiler('c') }}"
-    - cython
-    - cross-python_emscripten-32
+    - cython <=2.0
+    - cross-python_emscripten-wasm32
     - python
     - numpy
     - pip
+    - packaging
   host:
     - python
     # Do not add any constraint on numpy here to use global pinning
@@ -40,7 +41,7 @@ requirements:
 about:
   home: https://www.statsmodels.org
   license: BSD-3-Clause
-  license_file: INSTALL.txt
+  license_file: LICENSE.txt
   summary: Statistical computations and models for use with SciPy
   dev_url: https://github.com/statsmodels/statsmodels
   doc_url: https://www.statsmodels.org/stable/

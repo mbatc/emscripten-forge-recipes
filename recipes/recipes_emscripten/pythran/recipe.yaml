@@ -1,5 +1,5 @@
 context:
-  version: "0.13.1"
+  version: "0.15.0"
 
 package:
   name: pythran
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/serge-sans-paille/pythran/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 0328a848bfa5aead55449c0b7de42cebb88ad8c1a3db9d2e3e6a56194b995599
+  sha256: 082b80649a014e75dbdcde2220be47f5446d649362cc8cf9b14f611117a01550
   patches:
     # this is necessary to fix a problem with mutable global
     # [wasm-validator error in module] unexpected true: Imported global cannot be mutable
@@ -24,14 +24,14 @@ requirements:
   build:
     - sel(build_platform != target_platform): python
     - sel(build_platform != target_platform): cross-python_{{ target_platform }}
-    - sel(build_platform != target_platform): numpy
+    - sel(build_platform != target_platform): numpy >=1.25
     - "{{ compiler('cxx') }}"
     # - clang                  # [win]
     # - clangxx                # [win]
     - pip
   host:
     - python
-    - numpy
+    - numpy >=1.25
   run:
     # To ensure ABI compatibility, we install the same version of the C++
     # compiler that was used when building. This is probably not necessary and
@@ -40,8 +40,8 @@ requirements:
     # - "{{ compiler('cxx') }}"  # [not win]
     # - clang                  # [win]
     # - clangxx                # [win]
-    - python
-    - numpy
+    - python >=3.11
+    - numpy >=1.25
     # - "{{ pin_compatible('numpy') }}"
     - decorator
     - gast 0.5.*

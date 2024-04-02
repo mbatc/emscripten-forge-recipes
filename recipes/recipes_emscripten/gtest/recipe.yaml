@@ -1,0 +1,41 @@
+context:
+  version: "1.14.0"
+
+package:
+  name: gtest-split
+  version: "{{ version }}"
+
+source:
+  url: https://github.com/google/googletest/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 8ad598c73ad796e0d8280b082cebd82a630d73e73cd3c70057938a6501bba5d7
+
+build:
+  number: 0
+
+outputs:
+  - package:
+      name: gtest
+    build:
+      # Builds are linked against the x.x.x version SO.
+      number: 0
+
+    requirements:
+      build:
+        - "{{ compiler('cxx') }}"
+        - cmake
+        - ninja
+      run_constrained:
+        - gmock {{ version }}
+
+  - package:
+  # empty wrapper for compatibility with previous output naming/separation
+      name: gmock
+
+    build:
+      number: 0
+    requirements:
+      host:
+        - gtest
+      run:
+        - gtest
+

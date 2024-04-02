@@ -1,5 +1,5 @@
 context:
-  version: 1.1.0
+  version: 2.0.0
   name: pyjs
 package:
   name: '{{name}}'
@@ -7,16 +7,17 @@ package:
 
 source:
   - url: https://github.com/emscripten-forge/{{name}}/archive/refs/tags/{{version}}.tar.gz
-    sha256: e4cef4fc6b8aefb9f347d848b037c2085d7abad0bebd863e42f62e1f01401a87
+    sha256: 668f36da03ab81d35850205c47e96e1c08afc20559d72dc3c734bba2c678b826
+
 build:
   number: 0
 
 requirements:
   build:
+    - '{{ compiler("c") }}'
     - '{{ compiler("cxx") }}'
     - cmake
-    - ninja
-    - python
+    - make
   host:
     - python
     - sqlite
@@ -31,7 +32,6 @@ about:
   license_family: BSD
   license_file: LICENSE
   summary: pyjs
-
 
 extra:
   recipe-maintainers:

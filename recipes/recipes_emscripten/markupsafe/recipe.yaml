@@ -1,5 +1,5 @@
 context:
-  version: '2.1.3'
+  version: '2.1.5'
 
 package:
   name: markupsafe
@@ -7,16 +7,16 @@ package:
 
 source:
   url: https://github.com/pallets/markupsafe/archive/refs/tags/{{ version }}.tar.gz
-  sha256: b209e55e953eabf4bc31e0c9f3182af03b40e5bf5afed652f72b9b7ac02c0b30
+  sha256: 307f63295d17f178b7d3af5968fb828e34086d5d66fec505b630a1e5f5b3328b
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
     - '{{ compiler("c") }}'
     - python
-    - cross-python_emscripten-32
+    - cross-python_emscripten-wasm32
     - pip
   host:
     - python
