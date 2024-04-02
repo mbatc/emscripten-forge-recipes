@@ -1,5 +1,5 @@
 context:
-  version: '1.8.2'
+  version: '1.8.3'
 
 package:
   name: "benchmark"
@@ -8,10 +8,12 @@ package:
 source:
   fn: benchmark-{{ version }}.tar.gz
   url: https://github.com/google/benchmark/archive/v{{ version }}.tar.gz
-  sha256: 2aab2980d0376137f969d92848fbb68216abb07633034534fc8c65cc4e7a0e93
+  sha256: 6bc180a57d23d4d9515519f92b0c83d61b05b5bab188961f36ac7b06b0d9e9ce
+  patches:
+    - fix-build.patch
 
 build:
-  number: 0
+  number: 3
 
 requirements:
   build:
@@ -23,10 +25,8 @@ requirements:
 test:
   commands:
     - test -f $PREFIX/include/benchmark/benchmark.h  # [unix]
-    - test -f $PREFIX/lib/libbenchmark.a  # [unix]
-    - test -f $PREFIX/lib/libbenchmark_main.a  # [unix]
-    # - test -f $PREFIX/lib/libbenchmark${SHLIB_EXT}  # [unix]
-    # - test -f $PREFIX/lib/libbenchmark_main${SHLIB_EXT}  # [unix]
+    - test -f $PREFIX/lib/libbenchmark.so  # [unix]
+    - test -f $PREFIX/lib/libbenchmark_main.so  # [unix]
 
 about:
   home: https://github.com/google/benchmark
