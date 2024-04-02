@@ -1,5 +1,5 @@
 context:
-  version: 0.4.1
+  version: 0.4.2
 
 package:
   name: xcanvas
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/jupyter-xeus/xcanvas/archive/refs/tags/{{ version }}.tar.gz
-  sha256: e64f2738f61abf25f3010f50ea631f3b4b44a0fac8dbee6f31c7d2d67b58b9f8
+  sha256: 697c83f1d34577c2c121fd83a72eabba12a73c14bef72b49a30289a8db0f0a55
 
 build:
-  number: 2
+  number: 0
 
 requirements:
   build:
@@ -20,8 +20,7 @@ requirements:
   host:
     - xtl >=0.7,<0.8
     - xproperty >=0.11.0,<0.12
-    - xwidgets >=0.27.3,<0.28
-
+    - xwidgets >=0.28
 about:
   home: https://github.com/jupyter-xeus/xcanvas
   license: BSD-3
